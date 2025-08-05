@@ -1,0 +1,41 @@
+<p [ngStyle]="{'color': consommationPour100Km > 7 ? 'red' : consommationPour100Km < 4 ? 'green' : 'black'}">
+    Consommation pour 100 kms : {{ consommationPour100Km | number: '1.2-2' }}
+</p>
+
+<p [ngClass]="{'haute-distance': distanceKm > 500, 'basse-distance': distanceKm < 100}">
+    Nombre de kilomètres : {{ distanceKm }} km
+</p>
+
+<p>
+    Consommation totale : {{ consommationPour100Km * distanceKm / 100 | number: '1.2-2' }}
+</p>
+
+@if (consommationPour100Km > 7) {
+    <div >Attention, votre consommation est élevée</div>
+} @else if (consommationPour100Km < 4) {
+    <div>Félicitations, votre consommation est faible</div>
+}
+
+<button (click)="ajouter100km()">+100km</button>
+
+<h2>Liste des voyages</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Distance</th>
+            <th>Consommation pour 100 kms</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let voyage of voyages">
+            <td>{{ voyage.distanceKm }} km</td>
+            <td>{{ voyage.consommationPour100Km }} L</td>
+        </tr>
+    </tbody>
+</table>
+
+<button (click)="genererVoyage()">Générer voyage</button>
+
+<app-carbon-footprint-form></app-carbon-footprint-form>
+
+<app-carbon-footprint-result></app-carbon-footprint-result>

@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CarbonFootprintForm } from '../carbon-footprint-form/carbon-footprint-form';
 import { CarbonFootprintResult } from '../carbon-footprint-result/carbon-footprint-result';
-import { CarbonFootprintComputeService } from '../services/carbon-footprint-compute-service';
-import { Voyage } from '../models/voyage';
+import { CarbonFootprintComputeService } from '../../services/carbon-footprint-compute-service';
+import { Voyage } from '../../models/voyage';
 
 @Component({
   selector: 'app-carbon-footprint',

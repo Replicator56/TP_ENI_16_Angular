@@ -34,7 +34,7 @@ export class CarbonFootprint {
     const distance = Math.ceil(Math.random() * 500);
     const consommation = Math.ceil(Math.random() * 10);
     const quantite = (distance * consommation) / 100 * 2.3;
-    this.carbonFootprintComputeSrv.addVoyage({ distanceKm: distance, consommationPour100Km: consommation, quantiteCO2: quantite });
+    this.carbonFootprintComputeSrv.addVoyage({ distanceKm: distance, consommationPour100Km: consommation, quantiteCO2: quantite, date: new Date(Date.now()) });
     this.voyages = this.carbonFootprintComputeSrv.getVoyages();
     this.actualiserDataVoyages();
   }

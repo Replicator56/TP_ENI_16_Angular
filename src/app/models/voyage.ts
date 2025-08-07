@@ -3,4 +3,5 @@ export interface Voyage {
     consommationPour100Km: number;
     quantiteCO2: number;
     date: Date;
+    typeVoyage: string;
 }

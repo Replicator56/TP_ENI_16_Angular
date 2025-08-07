@@ -29,12 +29,12 @@
             </div>
         }
         <div>
-            <label for="date">Date : </label>
-            <input type="date" id="date" name="date" value="{{ this.form.value.date | date: 'yyyy-MM-dd' }}">
-            @if (form.get('date')?.errors) {
+            <label for="dateVoyage">Date : </label>
+            <input type="date" id="date" name="date" formControlName="dateVoyage">
+            @if (form.get('dateVoyage')?.dirty && form.get('dateVoyage')?.errors) {
                 <p class="error">La date est obligatoire !</p>
             }
-            </div>
+        </div>
         <div>
             <button type="submit" matButton="filled" [disabled]="form.invalid">Ajouter un voyage</button>
         </div>

@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DatePipe, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CarbonFootprintComputeService } from '../../services/carbon-footprint-compute-service';
 
 @Component({
   selector: 'app-carbon-footprint-form',
-  imports: [FormsModule, ReactiveFormsModule, DatePipe, TitleCasePipe, MatButtonModule],
+  imports: [FormsModule, ReactiveFormsModule, TitleCasePipe, MatButtonModule],
   templateUrl: './carbon-footprint-form.html',
   styleUrl: './carbon-footprint-form.scss'
 })
@@ -15,13 +15,13 @@ export class CarbonFootprintForm {
     typeVoyage: new FormControl("voiture", Validators.required),
     distanceKm: new FormControl(0, Validators.min(1)),
     consommationPour100Km: new FormControl(1, Validators.min(1)),
-    date: new FormControl(new Date(Date.now()), Validators.required)
+    dateVoyage: new FormControl(new Date(Date.now()), Validators.required)
   });
   listTypesVoyage: string[] = ['voiture', 'train', 'avion'];
 
   private carbonFootPrintComputeSrv: CarbonFootprintComputeService = inject(CarbonFootprintComputeService);
 
-  validateForm() {
+  async validateForm() {
     if (this.form?.valid) {
       let qteCO2 = 0;
       let consommation = 0;
@@ -35,11 +35,14 @@ export class CarbonFootprintForm {
         qteCO2 = this.form.value.distanceKm * 0.2;
       }
 
-      this.carbonFootPrintComputeSrv.addVoyage({
+      console.log(this.form.value.dateVoyage);
+
+      await this.carbonFootPrintComputeSrv.addVoyage({
         distanceKm: this.form.value.distanceKm,
         consommationPour100Km: consommation,
         quantiteCO2: qteCO2,
-        date: this.form.value.date
+        date: this.form.value.dateVoyage,
+        typeVoyage: this.form.value.typeVoyage
       });
     }
   }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -12,11 +12,17 @@ import { User } from '../../services/user';
   styleUrl: './header.scss'
 })
 export class Header {
-  nomUtilisateur: string = '';
+  // Création d'un signal
+  nomUtilisateur: WritableSignal<string> = signal('');
 
   private userSrv: User = inject(User);
 
-  ngOnInit() {
-    this.nomUtilisateur = this.userSrv.getUsername();
+  async ngOnInit() {
+    try {
+      // On attribue une nouvelle valeur au signal
+      this.nomUtilisateur.set(await this.userSrv.getUsername());
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

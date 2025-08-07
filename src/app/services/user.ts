@@ -6,11 +6,12 @@ import { Injectable } from '@angular/core';
 export class User {
   private username: string = '';
 
-  login(username: string) {
+  async login(username: string) {
     this.username = username;
+    console.log(this.username);
   }
 
-  getUsername() {
+  async getUsername() {
     return this.username;
   }
 }

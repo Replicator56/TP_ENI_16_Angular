@@ -4,4 +4,5 @@ export interface Voyage {
     quantiteCO2: number;
     date: Date;
     typeVoyage: string;
+    typeCarburant: string | undefined;
 }

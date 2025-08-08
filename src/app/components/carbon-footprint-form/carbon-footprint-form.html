@@ -12,6 +12,28 @@
                 <p class="error">Le type de voyage est obligatoire !</p>
             }
         </div>
+
+        @if (form.get('typeVoyage')!.value != 'avion') {
+            <div>
+                <p>Type de carburant : </p>
+                @if (form.get('typeVoyage')!.value === 'voiture') {
+                    <input type="radio" id="typeCarburant1" name="typeCarburant" formControlName="typeCarburant" value="essence">
+                    <label for="typeCarburant1">Essence</label>
+                    <br> 
+                }
+                <input type="radio" id="typeCarburant2" name="typeCarburant" formControlName="typeCarburant" value="diesel">
+                <label for="typeCarburant2">Diesel</label>
+                <br>
+                @if (form.get('typeVoyage')!.value === 'train') {
+                    <input type="radio" id="typeCarburant3" name="typeCarburant" formControlName="typeCarburant" value="electricite">
+                    <label for="typeCarburant3">Electricité</label>
+                }
+                @if (form.get('typeCarburant')?.dirty && form.get('typeCarburant')?.errors) {
+                    <p class="error">Le type de carburant est obligatoire !</p>
+                }
+            </div>
+        }
+
         <div>
             <label for="distanceKm">Distance : </label>
             <input type="number" id="distanceKm" name="distanceKm" formControlName="distanceKm" min="0">

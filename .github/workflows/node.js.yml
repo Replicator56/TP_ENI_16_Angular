@@ -56,4 +56,4 @@ jobs:
 
       # 🔟 Lancer les tests sur Firefox
       - name: Run tests
-        run: npx ng test --watch=fals
+        run: npx ng test --watch=false

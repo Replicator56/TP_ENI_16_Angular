@@ -25,7 +25,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      # 3️⃣ Nettoyage des anciennes dépendances obsolètes
+      # 3️⃣ Nettoyer les anciennes dépendances obsolètes
       - name: Remove old obsolete packages
         run: |
           npm uninstall build jxLoader uglify-js || true
@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 5️⃣ Installer Angular CLI localement si nécessaire
+      # 5️⃣ Installer Angular CLI localement
       - name: Install Angular CLI
         run: npm install @angular/cli --save-dev
 
@@ -42,7 +42,7 @@ jobs:
       - name: Install Karma Chrome Launcher
         run: npm install --save-dev karma-chrome-launcher
 
-      # 7️⃣ Installer Chrome dans le runner Ubuntu
+      # 7️⃣ Installer Google Chrome
       - name: Install Google Chrome
         run: |
           wget -q -O google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb

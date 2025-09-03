@@ -1,4 +1,4 @@
-name: Angular CI/CD Secure with Firefox
+name: Angular CI/CD Secure with Chrome
 
 on:
   push:
@@ -38,13 +38,15 @@ jobs:
       - name: Install Angular CLI
         run: npm install @angular/cli --save-dev
 
-      # 6️⃣ Installer le launcher Firefox pour Karma
-      - name: Install Karma Firefox Launcher
-        run: npm install --save-dev karma-firefox-launcher
+      # 6️⃣ Installer le launcher Chrome pour Karma
+      - name: Install Karma Chrome Launcher
+        run: npm install --save-dev karma-chrome-launcher
 
-      # 7️⃣ Installer Firefox dans le runner
-      - name: Install Firefox
-        run: sudo apt-get update && sudo apt-get install -y firefox
+      # 7️⃣ Installer Chrome dans le runner Ubuntu
+      - name: Install Google Chrome
+        run: |
+          wget -q -O google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome.deb
 
       # 8️⃣ Vérifier les vulnérabilités restantes
       - name: Audit npm packages
@@ -54,7 +56,6 @@ jobs:
       - name: Build Angular project
         run: npx ng build --configuration production
 
-      # 🔟 Lancer les tests sur Firefox
-      - name: Run tests on Firefox
-        run: npx ng test --watch=false
-
+      # 🔟 Lancer les tests sur ChromeHeadless
+      - name: Run tests on ChromeHeadless
+        run: npx ng test --watch=false --browsers=ChromeHeadless

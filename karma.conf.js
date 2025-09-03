@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -9,9 +9,6 @@ module.exports = function(config) {
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
-    client: {
-      clearContext: false
-    },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,

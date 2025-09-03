@@ -55,5 +55,6 @@ jobs:
         run: npx ng build --configuration production
 
       # 🔟 Lancer les tests sur Firefox
-      - name: Run tests
+      - name: Run tests on Firefox
         run: npx ng test --watch=false
+

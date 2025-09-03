@@ -1,4 +1,4 @@
-name: Angular CI/CD Secure
+name: Angular CI/CD Secure with Firefox
 
 on:
   push:
@@ -38,14 +38,22 @@ jobs:
       - name: Install Angular CLI
         run: npm install @angular/cli --save-dev
 
-      # 6️⃣ Vérifier les vulnérabilités restantes
+      # 6️⃣ Installer le launcher Firefox pour Karma
+      - name: Install Karma Firefox Launcher
+        run: npm install --save-dev karma-firefox-launcher
+
+      # 7️⃣ Installer Firefox dans le runner
+      - name: Install Firefox
+        run: sudo apt-get update && sudo apt-get install -y firefox
+
+      # 8️⃣ Vérifier les vulnérabilités restantes
       - name: Audit npm packages
         run: npm audit --audit-level=high
 
-      # 7️⃣ Build Angular pour production
+      # 9️⃣ Build Angular pour production
       - name: Build Angular project
         run: npx ng build --configuration production
 
-      # 8️⃣ Exécuter les tests
+      # 🔟 Lancer les tests sur Firefox
       - name: Run tests
-        run: npm test
+        run: npx ng test --watch=false --browsers=Firefox
